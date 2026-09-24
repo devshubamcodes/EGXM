@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EGXM | Practice Today. Perform Tomorrow.</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #020b18;
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+        nav {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            background: rgba(2, 11, 24, 0.95);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            font-size: 30px;
+        }
+
+        .logo span {
+            color: #ffffff;
+        }
+
+        .logo span:last-child {
+            color: #168cff;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            color: #d6deea;
+            text-decoration: none;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #168cff;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #168cff, #0066ff);
+            border: none;
+            color: white;
+            padding: 13px 25px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,140,255,0.35);
+        }
+
+        /* HERO */
+        .hero {
+            min-height: calc(100vh - 70px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 70px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background glow */
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: rgba(0, 119, 255, 0.13);
+            filter: blur(100px);
+            border-radius: 50%;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 950px;
+        }
+
+        .hero h1 {
+            font-size: clamp(60px, 9vw, 115px);
+            font-style: italic;
+            font-weight: 800;
+            letter-spacing: -4px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            color: #168cff;
+        }
+
+        .tagline {
+            font-size: clamp(25px, 3vw, 40px);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .tagline span {
+            color: #168cff;
+        }
+
+        .description {
+            color: #aebdce;
+            font-size: 18px;
+            margin-bottom: 45px;
+        }
+
+        /* FEATURES */
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .feature {
+            width: 180px;
+            padding: 25px 15px;
+            background: rgba(255,255,255,0.045);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-7px);
+            border-color: #168cff;
+            background: rgba(22,140,255,0.08);
+        }
+
+        .feature-icon {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .feature h3 {
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        /* MAIN BUTTON */
+        .main-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 45px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #168cff, #0066ff);
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 10px 35px rgba(0, 119, 255, 0.25);
+            transition: 0.3s;
+        }
+
+        .main-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 45px rgba(0, 119, 255, 0.4);
+        }
+
+        .quote {
+            margin-top: 40px;
+            color: #dbe5ef;
+            font-size: 16px;
+            font-style: italic;
+        }
+
+        .line {
+            width: 45px;
+            height: 3px;
+            background: #168cff;
+            margin: 15px auto 0;
+            border-radius: 10px;
+        }
+
+        /* MOBILE */
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 50px 20px;
+            }
+
+            .hero h1 {
+                font-size: 65px;
+                letter-spacing: -2px;
+            }
+
+            .tagline {
+                font-size: 25px;
+            }
+
+            .description {
+                font-size: 16px;
+            }
+
+            .feature {
+                width: 145px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+
+        <div class="logo">
+            <div class="logo-icon">🎓</div>
+            <span>EG<span>XM</span></span>
+        </div>
+
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="subjects.html">Subjects</a>
+            <a href="about.html">About</a>
+        </div>
+
+        <a href="subjects.html" class="start-btn">
+    Start Quiz
+</a>
+
+    </nav>
+
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                EG<span>XM</span>
+            </h1>
+
+            <div class="tagline">
+                Kuch To Kar.
+                <span>To Perform Kal.</span>
+            </div>
+
+            <p class="description">
+                Topic-wise practice .
+            </p>
+
+
+            <!-- FEATURES -->
+            <div class="features">
+
+                <div class="feature">
+                    <div class="feature-icon">📖</div>
+                    <h3>Topic-wise<br>Questions</h3>
+                </div>
+
+                
+
+            
+
+               
+            </div>
+
+
+            <!-- START QUIZ -->
+           <a href="subjects.html" class="main-btn">
+    Start Quiz
+    <span>→</span>
+</a>
+
+
+            <p class="quote">
+                "THORA TO MEHNAT KRLE, BAKI TO EGXM KRDEGA" - EGXM
+            </p>
+
+            <div class="line"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+        function startQuiz() {
+
+            alert("Quiz section coming next! 🚀");
+
+            // Later we will replace this with:
+            // window.location.href = "subjects.html";
+
+        }
+
+    </script>
+
+</body>
+</html>

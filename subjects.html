@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EGXM | Subjects</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #020b18;
+            color: white;
+            text-align: center;
+        }
+
+        nav {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            border-bottom: 1px solid #1b2938;
+        }
+
+        .logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #168cff;
+    text-decoration: none;
+}
+
+        .home {
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            padding: 70px 20px;
+        }
+
+        h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #aebdce;
+            margin-bottom: 45px;
+        }
+
+        .subjects {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .subject {
+    width: 220px;
+    padding: 35px 20px;
+    background: #0d1a2b;
+    border: 1px solid #26384d;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+
+    /* Link ki default styling remove */
+    text-decoration: none;
+    color: white;
+    display: block;
+}
+
+.subject:hover {
+    border-color: #168cff;
+}
+
+        .subject:hover {
+            border-color: #168cff;
+        }
+
+        .subject h2 {
+            margin-bottom: 10px;
+        }
+
+        .subject p {
+            margin: 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">EGXM</a>
+
+        <a href="index.html" class="home">
+            Home
+        </a>
+    </nav>
+
+
+    <div class="container">
+
+        <h1>Choose Subject</h1>
+
+        <p>
+            Select a subject to start your practice.
+        </p>
+
+
+        <div class="subjects">
+
+           <a href="quiz.html" class="subject">
+          <h2>💻 C Programming</h2>
+          <p>Practice C programming questions.</p>
+            </a>
+
+
+            <div class="subject">
+                <h2>📐 Mathematics</h2>
+                <p>Practice engineering mathematics.</p>
+            </div>
+
+
+            <div class="subject">
+                <h2>⚡ Physics</h2>
+                <p>Practice physics questions.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
