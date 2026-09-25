@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <url>
-    <loc>https://devshubamcodes.github.io/EGXM/</loc>
-</url>
+    <url>
+        <loc>https://devshubamcodes.github.io/EGXM/</loc>
+    </url>
 
-<url>
-    <loc>https://devshubamcodes.github.io/EGXM/subjects.html</loc>
-</url>
+    <url>
+        <loc>https://devshubamcodes.github.io/EGXM/subjects.html</loc>
+    </url>
 
-<url>
-    <loc>https://devshubamcodes.github.io/EGXM/quiz.html</loc>
-</url>
+    <url>
+        <loc>https://devshubamcodes.github.io/EGXM/quiz.html</loc>
+    </url>
 
-<url>
-    <loc>https://devshubamcodes.github.io/EGXM/about.html</loc>
-</url>
+    <url>
+        <loc>https://devshubamcodes.github.io/EGXM/about.html</loc>
+    </url>
+
+</urlset>
