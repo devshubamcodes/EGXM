@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EGXM | C Programming Topics</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #020b18;
+            color: white;
+            text-align: center;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+        nav {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            border-bottom: 1px solid #1b2938;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #168cff;
+            text-decoration: none;
+        }
+
+        .home {
+            color: white;
+            text-decoration: none;
+        }
+
+        .home:hover {
+            color: #168cff;
+        }
+
+        /* MAIN */
+        .container {
+            padding: 60px 20px;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            color: #aebdce;
+            margin-bottom: 45px;
+        }
+
+        /* TOPICS */
+        .topics {
+            max-width: 1000px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .topic {
+            display: block;
+            padding: 30px 15px;
+            background: #0d1a2b;
+            border: 1px solid #26384d;
+            border-radius: 14px;
+            color: white;
+            text-decoration: none;
+            transition: 0.25s;
+        }
+
+        .topic:hover {
+            transform: translateY(-5px);
+            border-color: #168cff;
+            background: #102238;
+        }
+
+        .topic-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .topic h2 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .topic p {
+            color: #aebdce;
+            font-size: 13px;
+            margin: 0;
+        }
+
+        /* BACK BUTTON */
+        .back {
+            display: inline-block;
+            margin-top: 45px;
+            color: #aebdce;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back:hover {
+            color: #168cff;
+        }
+
+        /* MOBILE */
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 0 20px;
+            }
+
+            .container {
+                padding: 45px 15px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+                margin-bottom: 30px;
+            }
+
+            .topics {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px;
+            }
+
+            .topic {
+                padding: 25px 10px;
+            }
+
+            .topic-icon {
+                font-size: 27px;
+            }
+
+            .topic h2 {
+                font-size: 15px;
+            }
+
+            .topic p {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+
+        <a href="index.html" class="logo">
+            EGXM
+        </a>
+
+        <a href="subjects.html" class="home">
+            Subjects
+        </a>
+
+    </nav>
+
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+
+        <h1>💻 C Programming</h1>
+
+        <p class="subtitle">
+            Choose a topic to start your practice.
+        </p>
+
+
+        <!-- TOPICS -->
+        <div class="topics">
+
+            <a href="quiz.html?topic=basics" class="topic">
+                <div class="topic-icon">📘</div>
+                <h2>Basics</h2>
+                <p>Learn the fundamentals of C.</p>
+            </a>
+
+            <a href="quiz.html?topic=variables" class="topic">
+                <div class="topic-icon">🔢</div>
+                <h2>Variables & Data Types</h2>
+                <p>Practice variables and data types.</p>
+            </a>
+
+            <a href="quiz.html?topic=operators" class="topic">
+                <div class="topic-icon">➕</div>
+                <h2>Operators</h2>
+                <p>Arithmetic, relational and logical operators.</p>
+            </a>
+
+            <a href="quiz.html?topic=input-output" class="topic">
+                <div class="topic-icon">⌨️</div>
+                <h2>Input / Output</h2>
+                <p>Practice scanf and printf.</p>
+            </a>
+
+            <a href="quiz.html?topic=if-else" class="topic">
+                <div class="topic-icon">🔀</div>
+                <h2>If-Else</h2>
+                <p>Practice decision-making statements.</p>
+            </a>
+
+            <a href="quiz.html?topic=loops" class="topic">
+                <div class="topic-icon">🔄</div>
+                <h2>Loops</h2>
+                <p>Practice for, while and do-while.</p>
+            </a>
+
+            <a href="quiz.html?topic=functions" class="topic">
+                <div class="topic-icon">⚙️</div>
+                <h2>Functions</h2>
+                <p>Practice functions in C.</p>
+            </a>
+
+            <a href="quiz.html?topic=structures" class="topic">
+                <div class="topic-icon">🧩</div>
+                <h2>Structures</h2>
+                <p>Practice structures in C.</p>
+            </a>
+
+        </div>
+
+
+        <a href="subjects.html" class="back">
+            ← Back to Subjects
+        </a>
+
+    </div>
+
+</body>
+</html>
