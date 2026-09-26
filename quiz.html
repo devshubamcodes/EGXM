@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EGXM | C Programming Quiz</title>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #020b18;
+            color: white;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 25px;
+            left: 30px;
+            color: white;
+            text-decoration: none;
+            background: #0d1a2b;
+            border: 1px solid #26384d;
+            padding: 10px 18px;
+            border-radius: 8px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 80px auto;
+            padding: 20px;
+        }
+
+        .logo {
+            color: #168cff;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            color: #aebdce;
+        }
+
+        .progress {
+            color: #8fa4bb;
+            margin-top: 25px;
+        }
+
+        .live-score {
+            color: #168cff;
+            margin-top: 8px;
+            font-weight: bold;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            min-height: 24px;
+            color: #aebdce;
+            font-weight: bold;
+        }
+
+        .question-box, .result-box {
+            background: #0d1a2b;
+            border: 1px solid #26384d;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        #question {
+            font-size: 22px;
+            line-height: 1.5;
+        }
+
+        .option {
+            display: block;
+            background: #142338;
+            border: 1px solid transparent;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            border-color: #168cff;
+        }
+
+        .option input {
+            margin-right: 10px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            background: #168cff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
+        .secondary {
+            background: #142338;
+            border: 1px solid #26384d;
+        }
+
+        .result-box {
+            display: none;
+            text-align: center;
+        }
+
+        .result-number {
+            font-size: 42px;
+            color: #168cff;
+            font-weight: bold;
+        }
+
+        .result-details {
+            line-height: 1.9;
+            color: #c1cedb;
+        }
+
+        @media (max-width: 600px) {
+            .back-btn {
+                position: static;
+                display: inline-block;
+                margin: 20px;
+            }
+
+            .container {
+                margin: 20px auto;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <a href="c-topics.html" class="back-btn">← Back</a>
+
+    <div class="container">
+
+        <div class="logo">EGXM</div>
+        <p class="subtitle">C Programming Quiz — 100 Questions</p>
+
+        <div id="quizArea">
+
+            <div class="progress" id="progress"></div>
+            <div class="live-score" id="liveScore">Score: 0</div>
+            <div class="feedback" id="feedback"></div>
+
+            <div class="question-box">
+
+                <h2 id="question"></h2>
+
+                <label class="option">
+                    <input type="radio" name="answer" value="0">
+                    <span id="option0"></span>
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="answer" value="1">
+                    <span id="option1"></span>
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="answer" value="2">
+                    <span id="option2"></span>
+                </label>
+
+                <label class="option">
+                    <input type="radio" name="answer" value="3">
+                    <span id="option3"></span>
+                </label>
+
+                <div class="buttons">
+                    <button class="secondary" id="previousBtn" onclick="previousQuestion()">
+                        ← Previous
+                    </button>
+
+                    <button id="nextBtn" onclick="nextQuestion()">
+                        Next →
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="result-box" id="resultArea">
+
+            <h2>Quiz Completed 🎉</h2>
+
+            <div class="result-number" id="score"></div>
+
+            <div class="result-details">
+                <p id="correct"></p>
+                <p id="wrong"></p>
+                <p id="percentage"></p>
+            </div>
+
+            <button onclick="restartQuiz()">Try Again</button>
+
+        </div>
+
+    </div>
+
+    <script>
+        const questions = [{"question": "Which header file is commonly used for printf() and scanf()?", "options": ["stdio.h", "math.h", "string.h", "stdlib.h"], "answer": 0}, {"question": "Which symbol ends a C statement?", "options": [".", ";", ":", ","], "answer": 1}, {"question": "Which function is used to display output?", "options": ["scanf()", "printf()", "input()", "display()"], "answer": 1}, {"question": "Which function is used to take formatted input?", "options": ["printf()", "scanf()", "input()", "read()"], "answer": 1}, {"question": "Which operator gives the remainder of integer division?", "options": ["/", "%", "*", "+"], "answer": 1}, {"question": "Which operator is used for addition?", "options": ["+", "-", "*", "/"], "answer": 0}, {"question": "Which operator is used for subtraction?", "options": ["+", "-", "%", "/"], "answer": 1}, {"question": "Which operator is used for multiplication?", "options": ["/", "*", "%", "-"], "answer": 1}, {"question": "Which operator is used for division?", "options": ["/", "*", "+", "%"], "answer": 0}, {"question": "Which operator checks equality?", "options": ["=", "==", "!=", "<="], "answer": 1}, {"question": "Which operator assigns a value to a variable?", "options": ["==", "=", "!=", "<"], "answer": 1}, {"question": "Which operator means 'not equal to'?", "options": ["=", "==", "!=", "!"], "answer": 2}, {"question": "Which operator means greater than?", "options": ["<", ">", ">=", "="], "answer": 1}, {"question": "Which operator means less than?", "options": [">", "<", "<=", "!="], "answer": 1}, {"question": "Which operator means greater than or equal to?", "options": [">", ">=", "<", "=="], "answer": 1}, {"question": "Which operator means less than or equal to?", "options": ["<", "<=", "==", ">="], "answer": 1}, {"question": "Which logical operator means AND?", "options": ["||", "&&", "!", "&"], "answer": 1}, {"question": "Which logical operator means OR?", "options": ["&&", "||", "!", "|"], "answer": 1}, {"question": "Which logical operator means NOT?", "options": ["!", "&&", "||", "!="], "answer": 0}, {"question": "Which keyword is used to declare an integer variable?", "options": ["float", "int", "char", "double"], "answer": 1}, {"question": "Which data type is used for a single character?", "options": ["int", "char", "float", "double"], "answer": 1}, {"question": "Which data type is used for decimal values in the examples?", "options": ["float", "char", "int", "void"], "answer": 0}, {"question": "Which function contains the main execution of a basic C program?", "options": ["start()", "main()", "run()", "execute()"], "answer": 1}, {"question": "What is the usual return type of main in the examples?", "options": ["char", "float", "int", "double"], "answer": 2}, {"question": "Which statement is used for decision making?", "options": ["if", "printf", "scanf", "include"], "answer": 0}, {"question": "Which statement provides an alternative when an if condition is false?", "options": ["else", "case", "break", "return"], "answer": 0}, {"question": "Which construct checks another condition after an if?", "options": ["else if", "switch", "for", "while"], "answer": 0}, {"question": "Which statement is useful for multiple fixed choices?", "options": ["switch", "for", "while", "struct"], "answer": 0}, {"question": "Which keyword marks a choice inside switch?", "options": ["option", "case", "choice", "select"], "answer": 1}, {"question": "Which keyword exits a switch case or loop?", "options": ["stop", "break", "exitloop", "end"], "answer": 1}, {"question": "Which keyword prevents fall-through to the next switch case?", "options": ["continue", "break", "return", "skip"], "answer": 1}, {"question": "Which operator is called the conditional/ternary operator?", "options": ["?:", "&&", "||", "=="], "answer": 0}, {"question": "How many operands does the ternary operator use?", "options": ["1", "2", "3", "4"], "answer": 2}, {"question": "In a ternary expression, what comes after the ? operator?", "options": ["condition", "true expression", "false expression", "case"], "answer": 1}, {"question": "In a ternary expression, what comes after : ?", "options": ["condition", "true expression", "false expression", "loop"], "answer": 2}, {"question": "Which loop is commonly used when the number of iterations is known?", "options": ["for", "if", "switch", "struct"], "answer": 0}, {"question": "Which loop repeats while a condition remains true?", "options": ["while", "switch", "if", "struct"], "answer": 0}, {"question": "Which loop checks its condition before each iteration?", "options": ["while", "do-while", "both for and while", "switch"], "answer": 2}, {"question": "Which loop is especially suitable for repeating input until a condition becomes true?", "options": ["while", "struct", "switch", "typedef"], "answer": 0}, {"question": "Which keyword immediately stops a loop?", "options": ["break", "continue", "case", "return"], "answer": 0}, {"question": "Which keyword skips the remaining statements of the current loop iteration?", "options": ["break", "continue", "case", "default"], "answer": 1}, {"question": "What is the purpose of a counter variable in a loop?", "options": ["Store a fixed message", "Track iterations", "Declare a structure", "Print automatically"], "answer": 1}, {"question": "Which operator is often used to test whether a number is even?", "options": ["%", "/", "*", "^"], "answer": 0}, {"question": "What is the remainder when an even number is divided by 2?", "options": ["0", "1", "2", "-1"], "answer": 0}, {"question": "What is the remainder when an odd number is divided by 2?", "options": ["0", "1", "2", "3"], "answer": 1}, {"question": "Which condition identifies an even number?", "options": ["n%2==0", "n/2==0", "n*2==0", "n+2==0"], "answer": 0}, {"question": "Which condition identifies an odd number?", "options": ["n%2==0", "n%2!=0", "n/2!=0", "n+2!=0"], "answer": 1}, {"question": "Which concept is used in a prime-number program to test divisibility?", "options": ["loop and remainder", "only printf", "only struct", "only scanf"], "answer": 0}, {"question": "A prime number has how many positive factors?", "options": ["1", "2", "3", "More than 3"], "answer": 1}, {"question": "Which number is not prime?", "options": ["2", "3", "4", "5"], "answer": 2}, {"question": "Which number is the first positive prime number?", "options": ["1", "2", "3", "4"], "answer": 1}, {"question": "What does a loop that starts from 1 and runs to 10 commonly produce?", "options": ["Values 1 to 10", "Only 10", "Only 1", "Values 0 to 9"], "answer": 0}, {"question": "Which statement can terminate a loop before its condition becomes false?", "options": ["break", "printf", "scanf", "struct"], "answer": 0}, {"question": "Which function can be written by the programmer for a specific task?", "options": ["user-defined function", "header file", "operator", "keyword"], "answer": 0}, {"question": "What is a function used for?", "options": ["Organizing reusable code", "Only declaring variables", "Only printing", "Only looping"], "answer": 0}, {"question": "Which keyword is used when a function sends a value back to its caller?", "options": ["return", "send", "back", "yield"], "answer": 0}, {"question": "In a simple swap function, what temporary variable is commonly used for?", "options": ["Holding a value during exchange", "Printing output", "Looping", "Declaring a struct"], "answer": 0}, {"question": "If temp=a; a=b; b=temp; what operation is performed?", "options": ["Swap", "Addition", "Multiplication", "Sorting only"], "answer": 0}, {"question": "Which keyword introduces a structure definition?", "options": ["struct", "class", "record", "object"], "answer": 0}, {"question": "A structure can group variables of:", "options": ["Only one type", "Different data types", "Only integers", "Only characters"], "answer": 1}, {"question": "Which operator accesses a member of a structure variable?", "options": [".", "->", "+", "%"], "answer": 0}, {"question": "If st is a structure variable and age is a member, which is correct?", "options": ["st.age", "st->age", "st:age", "st/age"], "answer": 0}, {"question": "Why are structures useful?", "options": ["They group related data", "They replace loops", "They replace printf", "They only store one value"], "answer": 0}, {"question": "A student structure might contain which combination?", "options": ["roll, name, marks", "only one integer", "only a loop", "only an operator"], "answer": 0}, {"question": "A book structure in the examples can contain:", "options": ["title, author, price", "only price", "only title", "only an operator"], "answer": 0}, {"question": "A salary record can be stored in a structure containing:", "options": ["employee details and salary", "only a loop", "only a condition", "only a header file"], "answer": 0}, {"question": "What is a variable?", "options": ["A named storage location", "A loop", "A header file", "A function call"], "answer": 0}, {"question": "What is a constant?", "options": ["A value that does not change during the intended use", "A loop counter only", "A function", "A structure"], "answer": 0}, {"question": "Which is a valid integer declaration?", "options": ["int a;", "integer a;", "num a;", "a int;"], "answer": 0}, {"question": "Which is a valid float declaration?", "options": ["float x;", "decimal x;", "x float;", "real x;"], "answer": 0}, {"question": "Which is a valid character declaration?", "options": ["char ch;", "character ch;", "ch char;", "letter ch;"], "answer": 0}, {"question": "What does scanf usually need for an integer variable a?", "options": ["&a", "a&", "*a", "%a"], "answer": 0}, {"question": "Which format specifier is commonly used for int in scanf/printf?", "options": ["%d", "%f", "%c", "%s"], "answer": 0}, {"question": "Which format specifier is commonly used for float?", "options": ["%d", "%f", "%c", "%i"], "answer": 1}, {"question": "Which format specifier is commonly used for char?", "options": ["%c", "%d", "%f", "%s"], "answer": 0}, {"question": "Which symbol begins a preprocessor include directive?", "options": ["#", "@", "$", "&"], "answer": 0}, {"question": "Which directive is commonly used to include stdio.h?", "options": ["#include <stdio.h>", "#use stdio.h", "#import stdio.h", "#header stdio.h"], "answer": 0}, {"question": "Why is indentation useful in C code?", "options": ["Improves readability", "Changes all operators", "Creates variables", "Compiles automatically"], "answer": 0}, {"question": "What does an if statement evaluate?", "options": ["A condition", "A structure name", "A header file", "A function name only"], "answer": 0}, {"question": "If an if condition is false and an else exists, which block runs?", "options": ["else block", "if block", "case block", "for block"], "answer": 0}, {"question": "In switch, what is default used for?", "options": ["No matching case", "First case only", "Looping", "Declaring variables"], "answer": 0}, {"question": "Can a switch have multiple case labels?", "options": ["Yes", "No", "Only two", "Only one"], "answer": 0}, {"question": "What happens if break is omitted in a switch case?", "options": ["Execution may continue into following cases", "Program always ends", "Nothing compiles", "It becomes an if"], "answer": 0}, {"question": "Which loop uses initialization, condition and update in one statement?", "options": ["for", "while", "switch", "if"], "answer": 0}, {"question": "What is the purpose of i++ in a loop?", "options": ["Increase i by 1", "Decrease i by 1", "Set i to 0", "Multiply i by 1"], "answer": 0}, {"question": "What is the purpose of i--?", "options": ["Increase i", "Decrease i by 1", "Set i to 1", "Multiply i by 2"], "answer": 1}, {"question": "If i starts at 1 and i++ runs once, what is i?", "options": ["0", "1", "2", "3"], "answer": 2}, {"question": "What does sum = sum + i do?", "options": ["Adds i to the current sum", "Subtracts i", "Resets sum", "Creates a loop"], "answer": 0}, {"question": "What initial value is commonly used for a sum accumulator?", "options": ["0", "1", "-1", "100"], "answer": 0}, {"question": "What initial value is commonly used for a product accumulator such as factorial?", "options": ["0", "1", "-1", "100"], "answer": 1}, {"question": "What is factorial of 1?", "options": ["0", "1", "2", "Undefined"], "answer": 1}, {"question": "What is 5!?", "options": ["10", "20", "120", "25"], "answer": 2}, {"question": "Which loop can be used to calculate a factorial?", "options": ["for", "if only", "switch only", "struct only"], "answer": 0}, {"question": "What is the purpose of an accumulator variable?", "options": ["Build a result step by step", "Declare a header", "End a program", "Define a structure"], "answer": 0}, {"question": "What does a nested loop mean?", "options": ["A loop inside another loop", "A loop without condition", "A loop inside an if only", "A switch inside a struct"], "answer": 0}, {"question": "A multiplication table program commonly uses:", "options": ["A loop", "Only a struct", "Only switch", "Only scanf"], "answer": 0}, {"question": "To print 2 x 1 through 2 x 10, which construct is suitable?", "options": ["for loop", "struct", "switch only", "if only"], "answer": 0}, {"question": "What is the purpose of comparing two values in a salary program?", "options": ["To find a larger/smaller value", "To include a header", "To declare a function", "To stop compilation"], "answer": 0}, {"question": "Which relational expression checks if a is greater than b?", "options": ["a>b", "a<b", "a==b", "a=b"], "answer": 0}, {"question": "Which relational operator checks whether two values are equal?", "options": ["=", "==", "!=", "<"], "answer": 1}];
+
+        // Get selected topic from c-topics.html
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedTopic = urlParams.get("topic");
+
+        // Existing 100 questions are filtered by topic.
+        // Arrays, Strings and Pointers are intentionally not included.
+        const topicRanges = {
+            basics: [[0, 3], [22, 23], [66, 67], [75, 76]],
+            variables: [[19, 21], [66, 70], [71, 74]],
+            operators: [[4, 18], [31, 34], [42, 46], [98, 99]],
+            "input-output": [[0, 3], [71, 76]],
+            "if-else": [[24, 34], [77, 82], [97, 99]],
+            loops: [[35, 53], [83, 96]],
+            functions: [[53, 57]],
+            structures: [[58, 65]]
+        };
+
+        const topicNames = {
+            basics: "Basics",
+            variables: "Variables & Data Types",
+            operators: "Operators",
+            "input-output": "Input / Output",
+            "if-else": "If-Else",
+            loops: "Loops",
+            functions: "Functions",
+            structures: "Structures"
+        };
+
+        function getTopicQuestions(topic) {
+            if (!topic || !topicRanges[topic]) return questions;
+
+            const selected = [];
+            topicRanges[topic].forEach(([start, end]) => {
+                for (let i = start; i <= end; i++) {
+                    if (!selected.includes(questions[i])) {
+                        selected.push(questions[i]);
+                    }
+                }
+            });
+            return selected;
+        }
+
+        const quizQuestions = getTopicQuestions(selectedTopic);
+
+        let currentQuestion = 0;
+        let answers = new Array(quizQuestions.length).fill(null);
+
+        // Show selected topic in the page title
+        const topicTitle = document.querySelector("h1");
+        if (topicTitle && selectedTopic && topicNames[selectedTopic]) {
+            topicTitle.innerText = "💻 " + topicNames[selectedTopic];
+        }
+
+        function loadQuestion() {
+            const q = quizQuestions[currentQuestion];
+
+            document.getElementById("progress").innerText =
+                "Question " + (currentQuestion + 1) + " of " + quizQuestions.length;
+
+            document.getElementById("question").innerText = q.question;
+
+            for (let i = 0; i < 4; i++) {
+                document.getElementById("option" + i).innerText =
+                    String.fromCharCode(65 + i) + ") " + q.options[i];
+            }
+
+            document.querySelectorAll('input[name="answer"]').forEach(input => {
+                input.checked = Number(input.value) === answers[currentQuestion];
+            });
+
+            document.getElementById("previousBtn").disabled = currentQuestion === 0;
+            document.getElementById("nextBtn").innerText =
+                currentQuestion === quizQuestions.length - 1
+                    ? "Submit Quiz ✓"
+                    : "Next →";
+        }
+
+        function saveAnswer() {
+            const selected = document.querySelector('input[name="answer"]:checked');
+
+            if (selected) {
+                answers[currentQuestion] = Number(selected.value);
+                return true;
+            }
+
+            return false;
+        }
+
+        function nextQuestion() {
+            if (!saveAnswer()) {
+                alert("Please select an answer.");
+                return;
+            }
+
+            const selectedAnswer = answers[currentQuestion];
+            const correctAnswer = quizQuestions[currentQuestion].answer;
+            const feedback = document.getElementById("feedback");
+
+            if (selectedAnswer === correctAnswer) {
+                feedback.innerText = "✓ Correct answer!";
+            } else {
+                feedback.innerText =
+                    "✗ Wrong. Correct answer: " +
+                    String.fromCharCode(65 + correctAnswer) + ") " +
+                    quizQuestions[currentQuestion].options[correctAnswer];
+            }
+
+            updateLiveScore();
+
+            if (currentQuestion < quizQuestions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function updateLiveScore() {
+            let correct = 0;
+
+            answers.forEach((answer, index) => {
+                if (answer !== null && answer === quizQuestions[index].answer) {
+                    correct++;
+                }
+            });
+
+            document.getElementById("liveScore").innerText = "Score: " + correct;
+        }
+
+        function previousQuestion() {
+            saveAnswer();
+
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                document.getElementById("feedback").innerText = "";
+                loadQuestion();
+            }
+        }
+
+        function showResult() {
+            let correct = 0;
+
+            answers.forEach((answer, index) => {
+                if (answer === quizQuestions[index].answer) {
+                    correct++;
+                }
+            });
+
+            const wrong = quizQuestions.length - correct;
+            const percentage = ((correct / quizQuestions.length) * 100).toFixed(1);
+
+            document.getElementById("quizArea").style.display = "none";
+            document.getElementById("resultArea").style.display = "block";
+
+            document.getElementById("score").innerText =
+                correct + " / " + quizQuestions.length;
+
+            document.getElementById("correct").innerText =
+                "Correct Answers: " + correct;
+
+            document.getElementById("wrong").innerText =
+                "Wrong / Unanswered: " + wrong;
+
+            document.getElementById("percentage").innerText =
+                "Percentage: " + percentage + "%";
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            answers = new Array(quizQuestions.length).fill(null);
+
+            document.getElementById("quizArea").style.display = "block";
+            document.getElementById("resultArea").style.display = "none";
+            document.getElementById("feedback").innerText = "";
+            document.getElementById("liveScore").innerText = "Score: 0";
+
+            loadQuestion();
+        }
+
+        loadQuestion();
+    </script>
+
+</body>
+</html>
